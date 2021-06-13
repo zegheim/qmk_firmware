@@ -41,20 +41,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     mod_state = get_mods();
     rgb_matrix_mode(RGB_MATRIX_MULTISPLASH);
     switch (keycode) {
-    case BSP_DEL:
-        if (record->event.pressed) {
-            if (mod_state & MOD_BIT(KC_LSFT)) {
-                del_mods(MOD_BIT(KC_LSFT)); // Cancel l-shift so it isn't applied to KC_DEL 
-                register_code(KC_DEL);
-                set_mods(mod_state); // Reapply cancelled l-shift so it continues to work after KC_DEL
+        case BSP_DEL:
+            if (record->event.pressed) {
+                if (mod_state & MOD_BIT(KC_LSFT)) {
+                    del_mods(MOD_BIT(KC_LSFT)); // Cancel l-shift so it isn't applied to KC_DEL 
+                    register_code(KC_DEL);
+                    set_mods(mod_state); // Reapply cancelled l-shift so it continues to work after KC_DEL
+                } else {
+                    register_code(KC_BSPC);
+                }
             } else {
-                register_code(KC_BSPC);
+                unregister_code(KC_DEL);
+                unregister_code(KC_BSPC);
             }
-        } else {
-            unregister_code(KC_DEL);
-            unregister_code(KC_BSPC);
-        }
-        return false;
+            return false;
+        default:
+            return true;
     }
-    return true;
 };
