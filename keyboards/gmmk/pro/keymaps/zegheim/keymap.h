@@ -6,6 +6,7 @@ uint16_t alt_tab_timer = 0;
 
 enum custom_keycodes {
     BSP_DEL = SAFE_RANGE,
+    RGB_RCT,
 };
 
 void matrix_scan_user(void) {
@@ -39,7 +40,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     mod_state = get_mods();
-    rgb_matrix_mode(RGB_MATRIX_MULTISPLASH);
     switch (keycode) {
         case BSP_DEL:
             if (record->event.pressed) {
@@ -55,6 +55,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_BSPC);
             }
             return false;
+        case RGB_RCT:
+            if (record->event.pressed) {
+                rgb_matrix_mode_noeeprom(RGB_MATRIX_SPLASH);
+            }
         default:
             return true;
     }
