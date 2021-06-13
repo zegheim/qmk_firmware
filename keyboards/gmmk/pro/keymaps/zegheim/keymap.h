@@ -39,6 +39,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     mod_state = get_mods();
+    rgb_matrix_mode(RGB_MATRIX_MULTISPLASH);
     switch (keycode) {
     case BSP_DEL:
         if (record->event.pressed) {
