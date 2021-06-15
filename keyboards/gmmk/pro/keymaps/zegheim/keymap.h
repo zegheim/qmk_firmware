@@ -6,6 +6,7 @@ uint16_t alt_tab_timer = 0;
 
 enum custom_keycodes {
     BSP_DEL = SAFE_RANGE,
+    RGB_BRT,
     RGB_RCT,
 };
 
@@ -17,6 +18,11 @@ void matrix_scan_user(void) {
         }
     }
 };
+
+void keyboard_post_init_user(void) {
+    rgb_matrix_sethsv_noeeprom(HSV_PINK);
+    rgb_matrix_mode_noeeprom(RGB_MATRIX_HUE_BREATHING);
+}
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
     // enables passing key sequences to the host system for a few seconds.
@@ -55,10 +61,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_BSPC);
             }
             return false;
+        case RGB_BRT:
+            if (record->event.pressed) {
+                rgb_matrix_mode_noeeprom(RGB_MATRIX_HUE_BREATHING);
+            }
+            return false;
         case RGB_RCT:
             if (record->event.pressed) {
                 rgb_matrix_mode_noeeprom(RGB_MATRIX_SPLASH);
             }
+            return false;
         default:
             return true;
     }
