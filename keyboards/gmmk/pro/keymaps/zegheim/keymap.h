@@ -8,6 +8,9 @@ enum custom_keycodes {
     BSP_DEL = SAFE_RANGE,
     RGB_BRT,
     RGB_RCT,
+    RGB_GRD,
+    RGB_SPD_UP,
+    RGB_SPD_DN,
 };
 
 void matrix_scan_user(void) {
@@ -20,8 +23,7 @@ void matrix_scan_user(void) {
 };
 
 void keyboard_post_init_user(void) {
-    rgb_matrix_sethsv_noeeprom(HSV_PINK);
-    rgb_matrix_mode_noeeprom(RGB_MATRIX_HUE_BREATHING);
+    rgb_matrix_mode_noeeprom(RGB_MATRIX_CYCLE_LEFT_RIGHT);
 }
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
@@ -69,6 +71,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case RGB_RCT:
             if (record->event.pressed) {
                 rgb_matrix_mode_noeeprom(RGB_MATRIX_SPLASH);
+            }
+            return false;
+        case RGB_GRD:
+            if (record->event.pressed) {
+                rgb_matrix_mode_noeeprom(RGB_MATRIX_CYCLE_LEFT_RIGHT);
+            }
+            return false;
+        case RGB_SPD_UP:
+            if (record->event.pressed) {
+                rgb_matrix_increase_speed_noeeprom();
+            }
+            return false;
+        case RGB_SPD_DN:
+            if (record->event.pressed) {
+                rgb_matrix_decrease_speed_noeeprom();
             }
             return false;
         default:
