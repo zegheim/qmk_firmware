@@ -27,13 +27,12 @@ void keyboard_post_init_user(void) {
 }
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
-    // enables passing key sequences to the host system for a few seconds.
-    tap_code16(C(KC_F2));
-
     alt_tab_timer = timer_read();
 
     if (!is_alt_tab_active) {
         is_alt_tab_active = true;
+        // enables passing key sequences to the host system for a few seconds.
+        tap_code16(C(KC_F2));
         register_code(KC_LALT);
     }
 
