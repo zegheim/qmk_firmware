@@ -49,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // Keymap FN: Function layer
 
     [FN] = LAYOUT(
-        _______, KC_MUTE, KC_VOLU, KC_VOLD, KC_MPLY, _______, KC_BRID, KC_BRIU, KC_PSCR, KC_HOME, KC_PGUP, KC_PGDN, KC_END,  _______,          _______,
+        _______, KC_MUTE, KC_VOLD, KC_VOLU, KC_MPLY, _______, KC_BRID, KC_BRIU, KC_PSCR, KC_HOME, KC_PGUP, KC_PGDN, KC_END,  _______,          _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______,          _______,          _______,
